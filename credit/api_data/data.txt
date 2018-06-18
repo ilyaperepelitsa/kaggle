@@ -1,1 +1,1 @@
-kaggle competitions download -c competitive-data-science-predict-future-sales
+kaggle competitions download -c home-credit-default-risk

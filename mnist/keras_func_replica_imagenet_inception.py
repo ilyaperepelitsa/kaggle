@@ -373,7 +373,7 @@ model.compile(loss = keras.losses.categorical_crossentropy,
 
 checkpoint = ModelCheckpoint(FINAL_LOGS, monitor='val_acc', verbose=0, save_best_only=True, mode='max')
 
-tensorbard = TensorBoard(log_dir=os.path.join(LOGS_PATH, "board"), histogram_freq=1,
+tensorbard = TensorBoard(log_dir=os.path.join(LOGS_PATH, "board"), histogram_freq=100,
           write_graph=True, write_images=True)
 # tbCallback.set_model(model)
 

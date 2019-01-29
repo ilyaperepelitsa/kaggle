@@ -63,7 +63,7 @@ ames_data = pd.read_csv(
                 os.path.join(
                         os.path.dirname(
                                 os.path.abspath("__file__")
-                        ),'ames/data/train.csv'
+                        ),'amnes/data/train.csv'
                     ),
             index_col = "Id")
 
@@ -73,6 +73,19 @@ y = ames_data["SalePrice"]
 # x.shape
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+
+
+def replace_never_seen_values(train, test):
+    # test.loc[~test.x.isin(train.x.unique()), test.x.name] = np.nan
+    for x in test:
+        test.loc[~test[x].isin(train[x].unique()), test[x].name] = test.loc[:, x].mode().values[0]
+        # print(test.loc[:, x].mode())
+
+def print_never_seen_values(train, test):
+    for x in test:
+        # print(test.loc[:, x].mode())
+        print(x, test.loc[~test[x].isin(train[x].unique()), test[x].name])
+
 
 # x_train.shape
 # x_test.shape
@@ -122,16 +135,7 @@ x_test_num = scaler.transform(x_test_num)
 # onehot_encoders = defaultdict(OneHotEncoder)
 # defaultdict([1, 2, 3])
 
-def replace_never_seen_values(train, test):
-    # test.loc[~test.x.isin(train.x.unique()), test.x.name] = np.nan
-    for x in test:
-        test.loc[~test[x].isin(train[x].unique()), test[x].name] = test.loc[:, x].mode().values[0]
-        # print(test.loc[:, x].mode())
 
-def print_never_seen_values(train, test):
-    for x in test:
-        # print(test.loc[:, x].mode())
-        print(x, test.loc[~test[x].isin(train[x].unique()), test[x].name])
 
 replace_never_seen_values(x_train_cat, x_test_cat)
 # print_never_seen_values(x_train_cat, x_test_cat)
@@ -151,24 +155,24 @@ x_test = np.hstack([x_test_num, x_test_ready_cat.toarray()])
 pd.DataFrame(x_train).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/train_x.csv'
+                            ),'amnes/data/working/train_x.csv'
                         ), index = False)
 pd.DataFrame(x_test).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/test_x.csv'
+                            ),'amnes/data/working/test_x.csv'
                         ), index = False)
 
 pd.DataFrame(y_train).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/train_y.csv'
+                            ),'amnes/data/working/train_y.csv'
                         ))
 
 pd.DataFrame(y_test).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/test_y.csv'
+                            ),'amnes/data/working/test_y.csv'
                         ))
 
 
@@ -292,9 +296,11 @@ x_train = pca_transformer.transform(x_train)
 # np.e ** np.log(y_train)
 
 scaler_y = StandardScaler(copy=True, with_mean=True, with_std=True)
-y_train = scaler_y.fit_transform(y_train.reshape(-1, 1))
+y_train = scaler_y.fit_transform(y_train.values.reshape(-1, 1))
+# y_train.values().reshape(-1, 1)
 
-# y_train.reshape(-1, 1).shape
+
+# y_train.values.reshape(-1, 1).shape
 # x_test_num = scaler_y.transform(x_test_num)
 # y_train = np.log(y_train)
 
@@ -304,7 +310,7 @@ y_train = scaler_y.fit_transform(y_train.reshape(-1, 1))
 
 
 
-grid.fit(x_train, y_train)
+grid.fit(x_train, y_train.ravel())
 
 pd.DataFrame(grid.grid_scores_).sort_values("mean_validation_score")
 
@@ -313,7 +319,7 @@ x_test = poli.transform(x_test)
 x_test = pca_transformer.transform(x_test)
 # pd.DataFrame(grid.grid_scores_)
 # pd.DataFrame(grid.grid_scores_).sort_values(by = )
-pd.DataFrame([np.e ** grid.predict(x_test), scaler_y.transform(y_test.reshape(-1, 1))])
+pd.DataFrame([np.e ** grid.predict(x_test), scaler_y.transform(y_test.values.reshape(-1, 1))])
 mean_squared_error(y_test, np.e ** grid.predict(x_test))
 # 2004,805,126
 # 716,852,668
@@ -354,7 +360,7 @@ test_data = pd.read_csv(
                 os.path.join(
                         os.path.dirname(
                                 os.path.abspath("__file__")
-                        ),'ames/data/test.csv'
+                        ),'amnes/data/test.csv'
                     ),
             index_col = "Id")
 #
@@ -381,16 +387,20 @@ test_data_ready = np.hstack([test_data_num, test_data_ready_cat.toarray()])
 pd.DataFrame(test_data_ready).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/target_x.csv'
+                            ),'amnes/data/working/target_x.csv'
                         ))
 test_data_ready = poli.transform(test_data_ready)
 test_data_ready = pca_transformer.transform(test_data_ready)
+# test_data_ready
 
-results = pd.DataFrame(np.e ** grid.predict(test_data_ready)).set_index(test_data.index)
-results
+
+# results = pd.DataFrame(np.e ** grid.predict(test_data_ready)).set_index(test_data.index)
+results = pd.DataFrame(scaler_y.inverse_transform(grid.predict(test_data_ready))).set_index(test_data.index)
+# results = results)
+
 results.rename(columns = {0: "SalePrice"}).to_csv(
                                             os.path.join(
                                                     os.path.dirname(
                                                             os.path.abspath("__file__")
-                                                    ),'ames/data/submission8.csv'
+                                                    ),'amnes/data/submission8.csv'
                                                 ))

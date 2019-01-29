@@ -20,7 +20,7 @@ ames_data = pd.read_csv(
                 os.path.join(
                         os.path.dirname(
                                 os.path.abspath("__file__")
-                        ),'ames/data/train.csv'
+                        ),'amnes/data/train.csv'
                     ),
             index_col = "Id")
 
@@ -73,24 +73,24 @@ x_test = np.hstack([x_test_num, x_test_ready_cat.toarray()])
 pd.DataFrame(x_train).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/train_x.csv'
+                            ),'amnes/data/working/train_x.csv'
                         ), index = False)
 pd.DataFrame(x_test).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/test_x.csv'
+                            ),'amnes/data/working/test_x.csv'
                         ), index = False)
 
 pd.DataFrame(y_train).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/train_y.csv'
+                            ),'amnes/data/working/train_y.csv'
                         ))
 
 pd.DataFrame(y_test).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/test_y.csv'
+                            ),'amnes/data/working/test_y.csv'
                         ))
 
 
@@ -98,7 +98,7 @@ test_data = pd.read_csv(
                 os.path.join(
                         os.path.dirname(
                                 os.path.abspath("__file__")
-                        ),'ames/data/test.csv'
+                        ),'amnes/data/test.csv'
                     ),
             index_col = "Id")
 
@@ -123,5 +123,5 @@ test_data_ready = np.hstack([test_data_num, test_data_ready_cat.toarray()])
 pd.DataFrame(test_data_ready).set_index(test_data.index).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/target_x.csv'
+                            ),'amnes/data/working/target_x.csv'
                         ))

@@ -23,7 +23,7 @@ ames_data = pd.read_csv(
                 os.path.join(
                         os.path.dirname(
                                 os.path.abspath("__file__")
-                        ),'ames/data/train.csv'
+                        ),'amnes/data/train.csv'
                     ),
             index_col = "Id")
 
@@ -84,24 +84,24 @@ x_test = poli.transform(x_test)
 pd.DataFrame(x_train).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/poli_quant_train_x.csv'
+                            ),'amnes/data/working/poli_quant_train_x.csv'
                         ), index = False)
 pd.DataFrame(x_test).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/poli_quant_test_x.csv'
+                            ),'amnes/data/working/poli_quant_test_x.csv'
                         ), index = False)
 
 pd.DataFrame(y_train).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/poli_quant_train_y.csv'
+                            ),'amnes/data/working/poli_quant_train_y.csv'
                         ))
 
 pd.DataFrame(y_test).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/poli_quant_test_y.csv'
+                            ),'amnes/data/working/poli_quant_test_y.csv'
                         ))
 
 
@@ -109,7 +109,7 @@ test_data = pd.read_csv(
                 os.path.join(
                         os.path.dirname(
                                 os.path.abspath("__file__")
-                        ),'ames/data/test.csv'
+                        ),'amnes/data/test.csv'
                     ),
             index_col = "Id")
 
@@ -140,5 +140,5 @@ test_data_ready = poli.transform(test_data_ready)
 pd.DataFrame(test_data_ready).set_index(test_data.index).to_csv(os.path.join(
                             os.path.dirname(
                                     os.path.abspath("__file__")
-                            ),'ames/data/working/poli_quant_target_x.csv'
+                            ),'amnes/data/working/poli_quant_target_x.csv'
                         ))

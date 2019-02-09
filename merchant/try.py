@@ -9,6 +9,8 @@ merchants = pd.read_csv("/Volumes/data_pew/numeric/merchant/merchants.csv")
 
 
 transactions.info()
+transactions.info()
+
 merchants.info()
 merchants.loc[:,merchants.columns.str.contains("_id")].info()
 transactions.loc[:,transactions.columns.str.contains("_id")].info()

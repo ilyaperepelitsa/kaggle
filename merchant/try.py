@@ -29,3 +29,4 @@ transactions.describe()
 # transactions.shape
 # 26169697 / 29112361
 merchants.head()
+transactions.head()

@@ -3,7 +3,7 @@ pd.set_option('display.float_format', lambda x: '%.3f' % x)
 
 
 pd.read_csv("/Volumes/data_pew/numeric/merchant/train.csv")
-# pd.read_csv("/Volumes/data_pew/numeric/merchant/test.csv")
+pd.read_csv("/Volumes/data_pew/numeric/merchant/test.csv")
 
 transactions = pd.read_csv("/Volumes/data_pew/numeric/merchant/historical_transactions.csv")
 new_transactions = pd.read_csv("/Volumes/data_pew/numeric/merchant/new_merchant_transactions.csv")

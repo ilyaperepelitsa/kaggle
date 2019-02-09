@@ -18,5 +18,5 @@ transactions.loc[:,transactions.columns.str.contains("_id")].info()
 
 
 
-merchants.loc[:,~merchants.columns.str.contains("_id")].s
+merchants.loc[:,~merchants.columns.str.contains("_id")].describe()
 transactions.loc[:,~transactions.columns.str.contains("_id")].info()

@@ -4,7 +4,7 @@ pd.read_csv("/Volumes/data_pew/numeric/merchant/train.csv")
 # pd.read_csv("/Volumes/data_pew/numeric/merchant/test.csv")
 
 transactions = pd.read_csv("/Volumes/data_pew/numeric/merchant/historical_transactions.csv")
-newtransactions = pd.read_csv("/Volumes/data_pew/numeric/merchant/merchants.csv")
+new_transactions = pd.read_csv("/Volumes/data_pew/numeric/merchant/new_merchant_transactions.csv")
 merchants = pd.read_csv("/Volumes/data_pew/numeric/merchant/merchants.csv")
 
 

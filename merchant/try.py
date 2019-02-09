@@ -26,5 +26,5 @@ transactions.loc[:,transactions.columns.str.contains("_id")].describe()
 transactions.describe()
 
 transactions.dropna().shape
-transactions.shape
-26169697 / (29112361
+# transactions.shape
+# 26169697 / 29112361

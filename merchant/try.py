@@ -28,4 +28,4 @@ transactions.describe()
 # transactions.dropna().shape
 # transactions.shape
 # 26169697 / 29112361
-merchants
+merchants.head()

@@ -1,4 +1,6 @@
 import pandas as pd
+pd.set_option('display.float_format', lambda x: '%.3f' % x)
+
 
 pd.read_csv("/Volumes/data_pew/numeric/merchant/train.csv")
 # pd.read_csv("/Volumes/data_pew/numeric/merchant/test.csv")

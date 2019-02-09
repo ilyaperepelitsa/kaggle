@@ -25,4 +25,5 @@ transactions.loc[:,~transactions.columns.str.contains("_id")].describe()
 transactions.loc[:,transactions.columns.str.contains("_id")].describe()
 transactions.describe()
 
-transactions.dropna().shape()
+transactions.dropna().shape
+transactions.dropna().shape
